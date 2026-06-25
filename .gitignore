@@ -36,7 +36,7 @@ out/
 *.njsproj
 *.sln
 *.sw?
-
+/node_modules/
 # 系统文件 Windows
 Thumbs.db
 Desktop.ini
