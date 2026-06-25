@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editor</title>
+</head>
+
+<body>
+
+    <textarea id="html" style="width:100%;height:200px;">
+<h1 style="color:red">Hello Tauri</h1>
+</textarea>
+
+    <br />
+
+    <input id="w" type="number" value="600">
+    <input id="h" type="number" value="400">
+
+    <button id="btn">Update Preview</button>
+
+    <div id="status"></div>
+
+    <script>
+        const html = document.getElementById('html');
+        const w = document.getElementById('w');
+        const h = document.getElementById('h');
+        const statusEl = document.getElementById('status');
+
+        function status(msg) {
+            statusEl.innerText = msg;
+        }
+
+        async function invokeUpdate(payload) {
+            try {
+                if (window.__TAURI__?.core?.invoke) {
+                    await window.__TAURI__.core.invoke('update_preview', payload);
+                } else if (window.__TAURI_INTERNALS__?.invoke) {
+                    await window.__TAURI_INTERNALS__.invoke('update_preview', payload);
+                } else {
+                    throw new Error("No Tauri API found");
+                }
+
+                status("sent ✔");
+            } catch (e) {
+                console.error(e);
+                status("invoke failed ❌");
+            }
+        }
+
+        document.getElementById('btn').onclick = () => {
+            invokeUpdate({
+                payload: {
+                    html: html.value,
+                    width: Number(w.value),
+                    height: Number(h.value)
+                }
+
+            });
+        };
+    </script>
+
+</body>
+
+</html>

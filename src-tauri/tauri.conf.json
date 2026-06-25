@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.tauri.app/config/2.0.0",
+  "productName": "tarui-screen",
+  "version": "1.0.0",
+  "identifier": "com.tarui-screen.app",
+  "build": {
+    "beforeDevCommand": null,
+    "devUrl": null,
+    "beforeBuildCommand": null,
+    "frontendDist": "./dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "HTML 输入窗口",
+        "label": "main",
+        "url": "index.html",
+        "width": 800,
+        "height": 600,
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": null,
+      "assetProtocol": {
+        "enable": true
+      }
+    }
+  },
+  "bundle": {
+    "active": false,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

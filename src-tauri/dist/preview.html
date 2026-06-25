@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Preview</title>
+    <script src="https://unpkg.com/dom-to-image-more"></script>
+
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        #container {
+
+            position: fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container"></div>
+
+
+    <script>
+        const container = document.getElementById("container");
+
+        // sleep 工具（纯 JS）
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        window.__UPDATE_PREVIEW__ = async (p) => {
+            container.innerHTML = p.html;
+
+            // 👉 等待 DOM 完全渲染
+            await sleep(50); // 可调：30~150ms
+
+            await takeSnap();
+        };
+
+        async function takeSnap() {
+            try {
+                const node = container;
+
+
+                const reader = new FileReader();
+
+                const dataUrl = await domtoimage.toPng(node);
+
+
+            } catch (e) {
+                console.error("snap failed:", e);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

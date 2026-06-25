@@ -1,0 +1,13 @@
+{
+  "name": "tarui-screen",
+  "version": "1.0.0",
+  "description": "A Tauri app with two windows: one for input, one for preview",
+  "scripts": {
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0"
+  }
+}
