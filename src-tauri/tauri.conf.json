@@ -10,6 +10,7 @@
     "frontendDist": "./dist"
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "title": "HTML 输入窗口",
@@ -17,7 +18,9 @@
         "url": "index.html",
         "width": 800,
         "height": 600,
-        "resizable": true
+        "decorations": false,
+        "transparent": false, 
+        "shadow": false
       }
     ],
     "security": {

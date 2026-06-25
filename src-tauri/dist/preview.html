@@ -10,25 +10,22 @@
     <style>
         html,
         body {
+            -webkit-app-region: drag;
             margin: 0;
             padding: 0;
             display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
         }
 
-        #container {
-
-            position: fixed;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-        }
+        #container {}
     </style>
 </head>
 
-<body>
+<body data-tauri-drag-region>
 
-    <div id="container"></div>
+    <div id="container" data-tauri-drag-region></div>
 
 
     <script>
@@ -41,27 +38,8 @@
 
         window.__UPDATE_PREVIEW__ = async (p) => {
             container.innerHTML = p.html;
-
-            // 👉 等待 DOM 完全渲染
-            await sleep(50); // 可调：30~150ms
-
-            await takeSnap();
         };
 
-        async function takeSnap() {
-            try {
-                const node = container;
-
-
-                const reader = new FileReader();
-
-                const dataUrl = await domtoimage.toPng(node);
-
-
-            } catch (e) {
-                console.error("snap failed:", e);
-            }
-        }
     </script>
 
 </body>
