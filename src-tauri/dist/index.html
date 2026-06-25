@@ -6,22 +6,64 @@
     <title>Editor</title>
 </head>
 
+<style>
+    body {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 10px;
+        padding: 0;
+        margin: 0;
+    }
+
+    textarea {
+        font-size: 16px;
+        border: none;
+        outline: none;
+    }
+
+    .panel {
+        position: fixed;
+        right: 0px;
+        bottom: 0px;
+        width: 100%;
+        background: #f2f2f2;
+        display: flex;
+        justify-content: right;
+        padding: 5px;
+    }
+
+    input {
+        border: none;
+        width: 50px;
+        text-align: center;
+        color: #333;
+    }
+    input:nth-child(1){
+        border-radius: 5px 0 0 5px;
+        border-right: 1px solid #ddd;
+    }
+
+    button {
+        color: #fff;
+        background: #333;
+        border: none;
+        border-radius: 0 5px 5px 0;
+    }
+</style>
+
 <body>
 
-<textarea id="html" style="width:100%;height:200px;">
-<h1 style="color:red">Hello Tauri</h1>
-<img src="./img.jpg"/>
+    <textarea id="html" style="width:100%;height:100%;" spellcheck="false" placeholder="请输入 HTML 代码"></textarea>
 
-</textarea>
+    <div class="panel">
+        <input id="w" type="number" value="600">
+        <input id="h" type="number" value="400">
 
-    <br />
+        <button id="btn">发射</button>
+    </div>
 
-    <input id="w" type="number" value="600">
-    <input id="h" type="number" value="400">
-
-    <button id="btn">Update Preview</button>
-
-    <div id="status"></div>
 
     <script>
         const html = document.getElementById('html');
