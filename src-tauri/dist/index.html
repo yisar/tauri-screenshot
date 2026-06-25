@@ -40,16 +40,22 @@
         text-align: center;
         color: #333;
     }
-    input:nth-child(1){
+
+    input:nth-child(1) {
         border-radius: 5px 0 0 5px;
         border-right: 1px solid #ddd;
     }
 
-    button {
+    #btn,
+    #btn2 {
         color: #fff;
         background: #333;
         border: none;
+    }
+
+    #btn2 {
         border-radius: 0 5px 5px 0;
+        border-left: 1px solid #000;
     }
 </style>
 
@@ -61,7 +67,8 @@
         <input id="w" type="number" value="600">
         <input id="h" type="number" value="400">
 
-        <button id="btn">发射</button>
+        <button id="btn">预览</button>
+        <button id="btn2">截图</button>
     </div>
 
 
@@ -92,8 +99,36 @@
             }
         }
 
+        async function invokeScreenShot(payload) {
+            try {
+                if (window.__TAURI__?.core?.invoke) {
+                    await window.__TAURI__.core.invoke('update_screenshot', payload);
+                } else if (window.__TAURI_INTERNALS__?.invoke) {
+                    await window.__TAURI_INTERNALS__.invoke('update_screenshot', payload);
+                } else {
+                    throw new Error("No Tauri API found");
+                }
+
+                status("sent ✔");
+            } catch (e) {
+                console.error(e);
+                status("invoke failed ❌");
+            }
+        }
+
         document.getElementById('btn').onclick = () => {
             invokeUpdate({
+                payload: {
+                    html: html.value,
+                    width: Number(w.value),
+                    height: Number(h.value)
+                }
+
+            });
+        };
+
+        document.getElementById('btn2').onclick = () => {
+            invokeScreenShot({
                 payload: {
                     html: html.value,
                     width: Number(w.value),
